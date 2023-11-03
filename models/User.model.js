@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET_JWT
 const tokenExpiration =process.env.TOKEN_EXPIRATION
-const saltOrRounds = process.env.SALT_OR_ROUNDS
 
 const userSchema = new mongoose.Schema({
     firstName: { type: String },
@@ -14,7 +13,7 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.methods.hashPassword = function (password) {
-    this.password = bcrypt.hashSync(password, saltOrRounds)
+    this.password = bcrypt.hashSync(password, 16)
 }
 
 userSchema.methods.generateJWT = function () {
