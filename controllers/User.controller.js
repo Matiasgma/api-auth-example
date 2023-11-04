@@ -15,7 +15,7 @@ const signUp = async (req, res) => {
         const resp = await user.save()
         return res.json({
             message: 'User was created successfully',
-            detail: resp
+            detail: user.onSignUpGenerateJWT()
         })
     } catch (err) {
         return res.json({
